@@ -2,6 +2,7 @@ import React from 'react';
 import throttle from '../services/throttle'
 import './Cocktails.css'
 import load from '../services/load'
+import CocktailsList from '../CocktailsList/CocktailsList'
 
 export default function  Cocktails() {
 
@@ -9,19 +10,19 @@ export default function  Cocktails() {
     const [cocktailsList, setCocktailsList] = React.useState({drinks: []})
     const [favorites, setFavorites] = React.useState(JSON.parse(localStorage.getItem('viqeo-task-infavorite') || '{ "favoritesList":[] }'))
 
-    React.useEffect(()=>{
-        throttle(
+    const changeThrottle = React.useCallback(throttle( (query) => {
+        if(query) {
             load(query).then(
-                list =>{
+                list => {
                     setCocktailsList(list)
                 }
-            ), 5000)
-    }, [query])
+            )
+        }}, 2000), []);
 
 
     const onChangeSearch = (event)=>{
         setQuery(event.target.value)
-
+        changeThrottle(event.target.value)
     }
 
    const onFavoritesChange = (coctail)=> {
@@ -40,22 +41,13 @@ export default function  Cocktails() {
     return (
         <div className="Cocktails">
             <input className="Cocktails_input" name="query" value={query} onChange={onChangeSearch}/>
-            <div className="Cocktails_list">
-                {query && cocktailsList.drinks && cocktailsList.drinks.map((cocktail)=>{
-                    return (
-                        <div key={cocktail.idDrink} className="Cocktails_list_item">
-                            <img className="Cocktails_item_image" alt={cocktail.strDrink} src={cocktail.strDrinkThumb}/>
-                            <span>{cocktail.strDrink}</span>
-                            <input type="checkbox"
-                                   value={cocktail.idDrink}
-                                   name={'favorite'}
-                                   onChange={()=>onFavoritesChange(cocktail)}
-                                   checked={!!favorites && favorites.favoritesList.findIndex(item => item.idDrink === cocktail.idDrink) > -1}
-                            />
-                        </div>
-                    )
-                })}
-            </div>
+            {query && cocktailsList.drinks && (
+                <CocktailsList
+                    cocktailsList={cocktailsList.drinks}
+                    favorites={favorites}
+                    onFavoritesChange={onFavoritesChange}
+                />
+            )}
         </div>
 
     )
