@@ -1,0 +1,28 @@
+
+.Cocktails {
+
+}
+.Cocktails_input{
+    width: 100%;
+    margin: 24px;
+    height: 40px;
+    border: 1px solid #eeeeee;
+    box-sizing: border-box;
+    padding: 8px;
+    margin-left: 0px;
+}
+.Cocktails_list {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 24px
+
+}
+.Cocktails_list_item {
+    display: flex;
+    flex-direction: column;
+    width: 200px;
+}
+.Cocktails_item_image {
+    width: 180px;
+    height: auto;
+}
