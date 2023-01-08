@@ -1,0 +1,18 @@
+
+.Todo {
+    margin: 16px auto;
+    display: flex;
+
+
+}
+.Todo_input{
+    width: 100%;
+    margin: 24px;
+    height: 40px;
+    border: 1px solid #cccccc;
+    box-sizing: border-box;
+    padding: 8px;
+    margin-left: 0px;
+
+}
+
