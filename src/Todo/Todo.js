@@ -1,7 +1,7 @@
 import React from 'react';
 import throttle from '../services/throttle'
 import './Todo.css'
-import load from '../services/load'
+import priceCheck from '../services/priceCheck'
 import TodoList from '../TodoList/TodoList'
 import { Button, TextField } from '@material-ui/core'
 
@@ -52,6 +52,21 @@ export default function  Todo() {
                 <TextField variant="outlined" className="Todo_input" name="query" onChange={onQueryChange}/>
                 <Button color="primary" onClick={onTodoAdd}>Add todo</Button>
             </div>
+            {/*<div>*/}
+            {/*    {priceCheck(['eggs', 'milk', 'cheese'],*/}
+            {/*         [2.89, 3.29, 5.79],*/}
+            {/*        ['eggs', 'eggs', 'cheese', 'milk'],*/}
+            {/*         [2.89, 2.99, 5.97, 3.29]*/}
+            {/*        )}*/}
+            {/*</div>*/}
+            {/*<div>*/}
+            {/*    {priceCheck(['rice', 'sugar', 'wheat', 'cheese'],*/}
+            {/*        [16.89, 56.92, 20.89, 345.99],*/}
+            {/*        ['rice', 'cheese'],*/}
+            {/*        [18.99, 400.89]*/}
+
+            {/*    )}*/}
+            {/*</div>*/}
             {todoList && (
                 <TodoList
                     todoList={todoList.todoList}
